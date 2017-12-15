@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="fyxxForm" type="module.map.form.FyxxbForm"></form-bean>
+    
+    </form-beans>
+    
+	<action-mappings>
+        <action path="/map/show" type="module.map.action.MapsAction" scope="request" name="fyxxForm">
+            <forward name="mapIndex" path="/WEB-INF/view/modules/maps/mapIndex.jsp"></forward>
+        </action>           
+    </action-mappings>
+</struts-config>
