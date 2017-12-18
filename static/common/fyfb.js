@@ -382,7 +382,7 @@ function MapSearch() {
                    "                <span>x厅x卫x室</span>                                                                                      "+
                    "                <span>南北</span>                                                                                           "+
                    "            </p>                                                                                                            "+
-                   "            <p class='description' title="+data[i].tbsm+">"+data[i].tbsm+"</p>                                       "+
+                   "            <p class='description' title='"+data[i].tbsm+"'>"+data[i].tbsm+"</p>                                       "+
                    "        </div>                                                                                                              "+
                    "    </a>                                                                                                                    "+
                    "</div>";                                                                                                                    
@@ -714,17 +714,18 @@ function loadingCustomOverlay(option,callback) {
                 time:10000,// 无论如何10秒后自动关闭加载提示效果
               });
             setTimeout(function() {
-                if (!data || data.length == 0) {
-                    layer.msg('当前可视区域暂无房源！请尝试移动到其他区域',{'time':2000});
-                    return;
-                }
-                for (var i = 0; i < data.length; i++) {
-                    (function(i) {
-                        callback(data[i]);
-                    })(i);
+                if (data && data.length != 0) {
+                    for (var i = 0; i < data.length; i++) {
+                    	(function(i) {
+                    		callback(data[i]);
+                    	})(i);
+                    }
                 }
                 // 覆盖物完全画完再关闭加载提示
                 layer.close(index);
+                if (!data || data.length == 0){
+                	layer.msg('当前可视区域暂无房源！请尝试移动到其他区域',{'time':2000});
+                }
             },400);
         }
     }); 

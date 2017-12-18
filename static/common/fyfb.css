@@ -24,7 +24,8 @@ input::-ms-reveal{display:none;}
 .open{background-position: -15px center !important;}
 
 .s_input{border:1px solid #e8e8e8;}
-.s_input .layui-input,.s_input .tt,.s_input a{border:0px;line-height: 38px;}
+.s_input .layui-input{border:0px;height: 38px;}
+.s_input .tt,.s_input a{border:0px;line-height: 38px;height: 38px;}
 .s_input .layui-form-select{float:left;width: 100px;border-right: 1px solid #e8e8e8;}
 .s_input .tt{margin-left: 10px; width: 270px;}
 .s_input a{display: inline-block;width: 30px;}
