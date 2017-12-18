@@ -188,13 +188,18 @@ function MapView(mapSearch) {
         v.doEvents();
     }
     
+    // 拖拽 ，缩放事件
     v.doEvents = function() {
         var map = v.map;
+        
         if (v.isDistrict(map)) {
+            // 清除非 住宅小区缩放等级时， 关键词条件
+            ms.setKeywords('');
             v.drawDistrict($.extend({}, ms.getCondition(), v.getView()), hd.getCityDm());
         }
         
         if (v.isStreet(map)) {
+            ms.setKeywords('');
             v.drawStreet($.extend({}, ms.getLocation(), ms.getCondition(), v.getView()), '');
         }
         
@@ -706,10 +711,9 @@ function loadingCustomOverlay(option,callback) {
         success: function (data) {
             var index = layer.load(1, {
                 shade: [0.3,'#000'],
-                time:3000,// 无论如何3秒后自动关闭加载提示效果
+                time:10000,// 无论如何10秒后自动关闭加载提示效果
               });
             setTimeout(function() {
-                layer.close(index);
                 if (!data || data.length == 0) {
                     layer.msg('当前可视区域暂无房源！请尝试移动到其他区域',{'time':2000});
                     return;
@@ -719,6 +723,8 @@ function loadingCustomOverlay(option,callback) {
                         callback(data[i]);
                     })(i);
                 }
+                // 覆盖物完全画完再关闭加载提示
+                layer.close(index);
             },400);
         }
     }); 
