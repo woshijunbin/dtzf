@@ -185,21 +185,25 @@ function MapView(mapSearch) {
     
     v.search = function() {
         v.clearAll();
-        v.doEvents();
+        v.doEvents(true);
     }
     
-    // 拖拽 ，缩放事件
-    v.doEvents = function() {
+    // keep 是否保留关键字搜索条件
+    v.doEvents = function(keep) {
         var map = v.map;
         
         if (v.isDistrict(map)) {
             // 清除非 住宅小区缩放等级时， 关键词条件
-            ms.setKeywords('');
+            if (!keep) {
+                ms.setKeywords(''); 
+            }
             v.drawDistrict($.extend({}, ms.getCondition(), v.getView()), hd.getCityDm());
         }
         
         if (v.isStreet(map)) {
-            ms.setKeywords('');
+            if (!keep) {
+                ms.setKeywords(''); 
+            }
             v.drawStreet($.extend({}, ms.getLocation(), ms.getCondition(), v.getView()), '');
         }
         
